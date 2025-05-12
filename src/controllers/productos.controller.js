@@ -1,126 +1,61 @@
-// controllers/productos.controller.js
+import ProductoService from "../services/Producto.services.js";
 
-const Producto = require('../models/Producto');
-
-
-// CRUD
-
-exports.listarProductos = async (req, res) => {
+// Crear producto
+export const crearProducto = async (req, res) => {
     try {
-        const productos = await Producto.findAll();
-        res.status(200).json(productos);
-    } catch (error) {
-        console.error('Error al listar los productos:', error);
-        res.status(500).json({ mensaje: 'Error al listar los productos.' });
-    }
-};
-
-exports.obtenerProducto = async (req, res) => {
-    const { id } = req.params;
-    try {
-        const producto = await Producto.findByPk(id);
-        if (!producto) {
-            return res.status(404).json({ mensaje: 'Producto no encontrado.' });
-        }
-        res.status(200).json(producto);
-    } catch (error) {
-        console.error('Error al obtener el producto:', error);
-        res.status(500).json({ mensaje: 'Error al obtener el producto.' });
-    }
-};
-
-// Si necesitas crear productos
-exports.crearProducto = async (req, res) => {
-    try {
-        const nuevoProducto = await Producto.create(req.body);
+        const nuevoProducto = await ProductoService.crearProducto(req.body);
         res.status(201).json(nuevoProducto);
     } catch (error) {
-        console.error('Error al crear el producto:', error);
-        res.status(500).json({ mensaje: 'Error al crear el producto.' });
+        res.status(500).json({ mensaje: error.message });
     }
 };
 
-// Si necesitas actualizar productos
-exports.actualizarProducto = async (req, res) => {
-    const { id } = req.params;
+// Obtener todos los productos
+export const obtenerProductos = async (req, res) => {
     try {
-        const [filasActualizadas] = await Producto.update(req.body, {
-            where: { id }
-        });
-        if (filasActualizadas > 0) {
-            const productoActualizado = await Producto.findByPk(id);
-            res.status(200).json(productoActualizado);
-        } else {
-            res.status(404).json({ mensaje: 'Producto no encontrado.' });
-        }
+        const productos = await ProductoService.obtenerProductos();
+        res.status(200).json(productos);
     } catch (error) {
-        console.error('Error al actualizar el producto:', error);
-        res.status(500).json({ mensaje: 'Error al actualizar el producto.' });
+        res.status(500).json({ mensaje: error.message });
     }
 };
 
-// Si necesitas eliminar productos
-exports.eliminarProducto = async (req, res) => {
-    const { id } = req.params;
+// Obtener producto por ID
+export const obtenerProductoPorId = async (req, res) => {
     try {
-        const filasEliminadas = await Producto.destroy({
-            where: { id }
-        });
-        if (filasEliminadas > 0) {
-            res.status(204).send(); // Sin contenido
-        } else {
-            res.status(404).json({ mensaje: 'Producto no encontrado.' });
-        }
+        const producto = await ProductoService.obtenerProductoPorId(req.params.id);
+        res.status(200).json(producto);
     } catch (error) {
-        console.error('Error al eliminar el producto:', error);
-        res.status(500).json({ mensaje: 'Error al eliminar el producto.' });
+        res.status(404).json({ mensaje: error.message });
     }
 };
 
-// Sección 2: Controladores adicionales
-exports.obtenerCantidadProducto = async (req, res) => {
-    const { id } = req.params;
+// Actualizar producto por ID
+export const actualizarProducto = async (req, res) => {
     try {
-        const producto = await Producto.findByPk(id, { attributes: ['cantidad'] }); 
-        if (!producto) {
-            return res.status(404).json({ mensaje: 'Producto no encontrado.' });
-        }
-        res.status(200).json({ cantidad: producto.cantidad });
+        const productoActualizado = await ProductoService.actualizarProducto(req.params.id, req.body);
+        res.status(200).json(productoActualizado);
     } catch (error) {
-        console.error('Error al obtener la cantidad del producto:', error);
-        res.status(500).json({ mensaje: 'Error al obtener la cantidad del producto.' });
+        res.status(404).json({ mensaje: error.message });
     }
 };
 
-exports.verificarUmbralProducto = async (req, res) => {
-    const { id } = req.params;
+// Eliminar producto por ID
+export const eliminarProducto = async (req, res) => {
     try {
-        const producto = await Producto.findByPk(id);
-        if (!producto) {
-            return res.status(404).json({ mensaje: 'Producto no encontrado.' });
-        }
-        // Aquí necesitarías acceder al umbral del producto (podría ser otro campo en el modelo Producto)
-        const umbral = producto.umbral_minimo || 0; // Asumiendo un campo 'umbral_minimo'
-        const enUmbral = producto.cantidad <= umbral;
-        res.status(200).json({ enUmbral });
+        const resultado = await ProductoService.eliminarProducto(req.params.id);
+        res.status(200).json(resultado);
     } catch (error) {
-        console.error('Error al verificar el umbral del producto:', error);
-        res.status(500).json({ mensaje: 'Error al verificar el umbral del producto.' });
+        res.status(404).json({ mensaje: error.message });
     }
 };
 
-exports.actualizarCantidadProducto = async (req, res) => {
-    const { id } = req.params;
-    const { cantidad } = req.body;
+// Buscar productos por tipo
+export const buscarProductosPorTipo = async (req, res) => {
     try {
-        const producto = await Producto.findByPk(id);
-        if (!producto) {
-            return res.status(404).json({ mensaje: 'Producto no encontrado.' });
-        }
-        await producto.update({ cantidad });
-        res.status(200).json({ mensaje: 'Cantidad del producto actualizada exitosamente.', cantidad });
+        const productos = await ProductoService.buscarProductosPorTipo(req.params.tipo);
+        res.status(200).json(productos);
     } catch (error) {
-        console.error('Error al actualizar la cantidad del producto:', error);
-        res.status(500).json({ mensaje: 'Error al actualizar la cantidad del producto.' });
+        res.status(500).json({ mensaje: error.message });
     }
 };

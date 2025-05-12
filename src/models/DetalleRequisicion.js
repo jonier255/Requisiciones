@@ -1,9 +1,9 @@
-const { DataTypes } = require("sequelize")
-const sequelize = require("../database/conexion")
-const Requisicion = require("./Requisicion")
-const Producto = require("./Producto")
+import { DataTypes } from "sequelize"
+import { sequelize } from "../database/conexion"
+import Requisicion from "./Requisicion"
+import Producto from "./Producto"
 
-const DetalleRequisicion = sequelize.sequelize.define("DetalleRequisicion", {
+const DetalleRequisicion = sequelize.define("DetalleRequisicion", {
      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -27,8 +27,8 @@ const DetalleRequisicion = sequelize.sequelize.define("DetalleRequisicion", {
     }
 })
 
-module.exports = DetalleRequisicion
+export default DetalleRequisicion
 Requisicion.hasOne(DetalleRequisicion, {foreignKey: 'requisicion_id'})
-Producto.hasMany(Producto, {foreignKey: 'producto_id'})
+Producto.hasMany(DetalleRequisicion, {foreignKey: 'producto_id'})
 DetalleRequisicion.belongsTo(Requisicion, {foreignKey: 'requisicion_id'})
 DetalleRequisicion.belongsTo(Producto, {foreignKey: 'producto_id'}) 
