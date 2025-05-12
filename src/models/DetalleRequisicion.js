@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize"
-import { sequelize } from "../database/conexion"
-import Requisicion from "./Requisicion"
-import Producto from "./Producto"
+import { sequelize } from "../database/conexion.js"
+import Requisicion from "./Requisicion.js"
+import Producto from "./Producto.js"
 
 const DetalleRequisicion = sequelize.define("DetalleRequisicion", {
      id: {
@@ -25,7 +25,10 @@ const DetalleRequisicion = sequelize.define("DetalleRequisicion", {
             key: 'id'
         }
     }
-})
+    }, { 
+        tableName: "detalle_requisicion",
+        timestamps: false
+}); 
 
 export default DetalleRequisicion
 Requisicion.hasOne(DetalleRequisicion, {foreignKey: 'requisicion_id'})

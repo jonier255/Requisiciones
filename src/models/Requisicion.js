@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize as sequelize } from "../database/conexion";
+import { sequelize as sequelize } from "../database/conexion.js";
 
 
 const Requisicion = sequelize.define("Requisicion", {
@@ -28,6 +28,9 @@ const Requisicion = sequelize.define("Requisicion", {
         type: DataTypes.TEXT,
         allowNull: true
     }
-})
+    }, { 
+        tableName: "requisicion",
+        timestamps: false
+});
 
 export default Requisicion;

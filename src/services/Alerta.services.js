@@ -1,4 +1,4 @@
-import Alerta from "../models/Alerta";
+import Alerta from "../models/Alerta.js";
 
 //crear alerta
 export const crearAlerta = async (data) => {

@@ -1,4 +1,4 @@
-import DetalleRequisicionService from "../services/detalleRequisicion.service.js";
+import DetalleRequisicionService from "../services/DetalleRequisicion.services.js"
 
 // Crear detalle de requisición
 export const crearDetalleRequisicion = async (req, res) => {
@@ -11,21 +11,21 @@ export const crearDetalleRequisicion = async (req, res) => {
     }
 };
 
-// Listar detalles de requisición por ID de requisición
-export const listarDetallesPorRequisicion = async (req, res) => {
-    try {
-        const detalles = await DetalleRequisicionService.listarDetallesPorRequisicion(req.params.requisicionId);
-        res.status(200).json(detalles);
-    } catch (error) {
-        console.error('Error al listar los detalles de la requisición:', error.message);
-        res.status(500).json({ mensaje: 'Error al listar los detalles de la requisición.' });
-    }
-};
+// // Listar detalles de requisición por ID de requisición
+// export const buscarPorRequisicionId = async (req, res) => {
+//     try {
+//         const detalles = await DetalleRequisicionService.buscarPorRequisicionId(req.params.requisicionId);
+//         res.status(200).json(detalles);
+//     } catch (error) {
+//         console.error('Error al listar los detalles de la requisición:', error.message);
+//         res.status(500).json({ mensaje: 'Error al listar los detalles de la requisición.' });
+//     }
+// };
 
 // Obtener detalle de requisición por ID
-export const obtenerDetalleRequisicion = async (req, res) => {
+export const buscarPorRequisicionId = async (req, res) => {
     try {
-        const detalle = await DetalleRequisicionService.obtenerDetalleRequisicionPorId(req.params.id);
+        const detalle = await DetalleRequisicionService.buscarPorRequisicionId(req.params.id);
         res.status(200).json(detalle);
     } catch (error) {
         console.error('Error al obtener el detalle de requisición:', error.message);
