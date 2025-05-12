@@ -25,7 +25,7 @@ export const crearDetalleRequisicion = async (req, res) => {
 // Obtener detalle de requisición por ID
 export const buscarPorRequisicionId = async (req, res) => {
     try {
-        const detalle = await DetalleRequisicionService.buscarPorRequisicionId(req.params.id);
+        const detalle = await DetalleRequisicionService.buscarPorRequisicionId(req.params.requisicion_id);
         res.status(200).json(detalle);
     } catch (error) {
         console.error('Error al obtener el detalle de requisición:', error.message);

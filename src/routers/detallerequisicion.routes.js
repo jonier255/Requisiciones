@@ -12,7 +12,7 @@ const router = express.Router();
 router.post("/", crearDetalleRequisicion);
 
 // Listar detalles de requisición por ID 
-router.get("/detallerequisicion/:requisicion_id", buscarPorRequisicionId);
+router.get("/requisicion/:requisicion_id", buscarPorRequisicionId);
 
 // Obtener detalle de requisición por ID
 // router.get("/:id", obtenerDetalleRequisicion);
