@@ -1,4 +1,4 @@
-import DetalleRequisicion from "../models/DetalleRequisicion";
+import DetalleRequisicion from "../models/DetalleRequisicion.js";
 
 
 //crear detalle
@@ -73,5 +73,6 @@ export default {
     obtenerDetallePorId,
     actualizarDetalle,
     eliminarDetalle,
-    buscarPorRequisicionId
+    buscarPorRequisicionId, 
+    
 };

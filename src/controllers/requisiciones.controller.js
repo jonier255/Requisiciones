@@ -1,4 +1,4 @@
-import RequisicionService from "../services/requisicion.service.js";
+import RequisicionService from "../services/requisicion.services.js";
 
 // Crear requisición
 export const crearRequisicion = async (req, res) => {

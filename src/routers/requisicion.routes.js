@@ -1,11 +1,11 @@
 import express from "express";
 import {
     crearRequisicion,
-    obtenerRequisiciones,
-    obtenerRequisicionPorId,
-    actualizarRequisicion,
+    listarRequisiciones,
+    obtenerRequisicion,
+    actualizarEstadoRequisicion,
     eliminarRequisicion
-} from "../controllers/requisicion.controller.js";
+} from "../controllers/requisiciones.controller.js";
 
 const router = express.Router();
 
@@ -13,13 +13,13 @@ const router = express.Router();
 router.post("/", crearRequisicion);
 
 // Obtener todas las requisiciones
-router.get("/", obtenerRequisiciones);
+router.get("/", listarRequisiciones);
 
 // Obtener requisición por ID
-router.get("/:id", obtenerRequisicionPorId);
+router.get("/:id", obtenerRequisicion);
 
 // Actualizar requisición por ID
-router.put("/:id", actualizarRequisicion);
+router.put("/:id", actualizarEstadoRequisicion);
 
 // Eliminar requisición por ID
 router.delete("/:id", eliminarRequisicion);

@@ -1,6 +1,6 @@
 import { DataTypes } from "sequelize"
-import { sequelize } from "../database/conexion"
-import Requisicion from "./Requisicion"
+import { sequelize } from "../database/conexion.js"
+import Requisicion from "./Requisicion.js"
 
 const Alerta = sequelize.define("Alerta", {
      id: {
@@ -28,7 +28,11 @@ const Alerta = sequelize.define("Alerta", {
         type: DataTypes.STRING,
         allowNull:false
     }
-})
+    }, {
+        tableName: "alerta",
+        timestamps: false
+   
+});
 
 export default Alerta
 Requisicion.hasOne(Alerta, {foreignKey: 'requisicion_id'})
