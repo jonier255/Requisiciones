@@ -1,7 +1,7 @@
-import { DataTypes, Model } from "sequelize";
-import { sequelize as _sequelize } from "../database/conexion";
+import { DataTypes } from "sequelize";
+import  { sequelize }  from "../database/conexion.js";
 
-const Producto =  _sequelize.define("Producto",{
+export const Producto =  sequelize.define("Producto",{
      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -19,6 +19,9 @@ const Producto =  _sequelize.define("Producto",{
         type: DataTypes.INTEGER,
         allowNull: false
     }
-})
+    }, {
+    tableName: "producto",
+    timestamps: false 
+});
 
 export default Producto;

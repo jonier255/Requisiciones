@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize"
-import { sequelize as _sequelize } from "../database/conexion"
+import { sequelize } from "../database/conexion"
 import Requisicion from "./Requisicion"
 
-const Alerta = _sequelize.define("Alerta", {
+const Alerta = sequelize.define("Alerta", {
      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,

@@ -1,6 +1,6 @@
-import Producto from "../models/Producto"; 
+import Producto from "../models/Producto.js"; 
 
-
+//crear
 export const crearProducto = async (data) => {
     try {
         const producto = await Producto.create(data);
@@ -9,7 +9,7 @@ export const crearProducto = async (data) => {
         throw new Error("Error al crear el producto: " + error.message);
     }
 };
-
+//obtener
 export const obtenerProductos = async () => {
     try {
         return await Producto.findAll();
@@ -17,7 +17,7 @@ export const obtenerProductos = async () => {
         throw new Error("Error al obtener los productos: " + error.message);
     }
 };
-
+//obtener por id
 export const obtenerProductoPorId = async (id) => {
     try {
         const producto = await Producto.findByPk(id);
@@ -29,7 +29,7 @@ export const obtenerProductoPorId = async (id) => {
         throw new Error("Error al buscar el producto por ID: " + error.message);
     }
 };
-
+//actualizar
 export const actualizarProducto = async (id, newData) => {
     try {
         const producto = await Producto.findByPk(id);
@@ -42,7 +42,7 @@ export const actualizarProducto = async (id, newData) => {
         throw new Error("Error al actualizar el producto: " + error.message);
     }
 };
-
+//eliminar
 export const eliminarProducto = async (id) => {
     try {
         const producto = await Producto.findByPk(id);
@@ -55,7 +55,7 @@ export const eliminarProducto = async (id) => {
         throw new Error("Error al eliminar el producto: " + error.message);
     }
 };
-
+//buscar por tipo
 export const buscarProductosPorTipo = async (tipo) => {
     try {
         return await Producto.findAll({

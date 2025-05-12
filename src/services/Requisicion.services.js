@@ -1,5 +1,7 @@
 import Requisicion from "../models/Requisicion.js";
 
+
+//crear
 export const crearRequisicion = async (data) => {
     try {
         const requisicion = await Requisicion.create(data);
@@ -8,7 +10,7 @@ export const crearRequisicion = async (data) => {
         throw new Error("Error al crear la requisición: " + error.message);
     }
 };
-
+//obtener
 export const obtenerRequisiciones = async () => {
     try {
         return await Requisicion.findAll();
@@ -16,7 +18,7 @@ export const obtenerRequisiciones = async () => {
         throw new Error("Error al obtener las requisiciones: " + error.message);
     }
 };
-
+//obtener por id
 export const obtenerRequisicionPorId = async (id) => {
     try {
         const requisicion = await Requisicion.findByPk(id);
@@ -28,7 +30,7 @@ export const obtenerRequisicionPorId = async (id) => {
         throw new Error("Error al obtener la requisición por ID: " + error.message);
     }
 };
-
+//actualizar
 export const actualizarRequisicion = async (id, newData) => {
     try {
         const requisicion = await Requisicion.findByPk(id);
@@ -41,7 +43,7 @@ export const actualizarRequisicion = async (id, newData) => {
         throw new Error("Error al actualizar la requisición: " + error.message);
     }
 };
-
+//eliminar
 export const eliminarRequisicion = async (id) => {
     try {
         const requisicion = await Requisicion.findByPk(id);
@@ -54,7 +56,7 @@ export const eliminarRequisicion = async (id) => {
         throw new Error("Error al eliminar la requisición: " + error.message);
     }
 };
-
+//buscar por estado
 export const buscarPorEstado = async (estado) => {
     try {
         return await Requisicion.findAll({ where: { estado } });
@@ -62,7 +64,7 @@ export const buscarPorEstado = async (estado) => {
         throw new Error("Error al buscar por estado: " + error.message);
     }
 };
-
+//buscar por tipo
 export const buscarPorTipo = async (tipo_requisicion) => {
     try {
         return await Requisicion.findAll({ where: { tipo_requisicion } });
