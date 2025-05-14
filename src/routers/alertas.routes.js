@@ -10,22 +10,24 @@ import {
 
 const router = express.Router();
 
+// Crear una nueva alerta
+router.post("/api/alertas", crearAlerta);
+
+
 // Listar todas las alertas
-router.get("/", listarAlertas);
+router.get("/api/alertas", listarAlertas);
 
 // Obtener una alerta por ID
-router.get("/:id", obtenerAlerta);
+router.get("/api/alerta/:id", obtenerAlerta);
 
-// Crear una nueva alerta
-router.post("/", crearAlerta);
 
 // Actualizar una alerta por ID
-router.put("/:id", actualizarAlerta);
+router.put("/api/alerta/:id", actualizarAlerta);
 
 // Eliminar una alerta por ID
-router.delete("/:id", eliminarAlerta);
+router.delete("/api/alerta/:id", eliminarAlerta);
 
 // Buscar alertas por estado
-router.get("/estado/:estado", buscarAlertasPorEstado);
+router.get("/api/alerta/estado/:estado", buscarAlertasPorEstado);
 
 export default router;

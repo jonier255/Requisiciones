@@ -10,18 +10,18 @@ import {
 const router = express.Router();
 
 // Crear requisición
-router.post("/", crearRequisicion);
+router.post("/api/requisicion", crearRequisicion);
 
 // Obtener todas las requisiciones
-router.get("/", listarRequisiciones);
+router.get("/api/requisiciones", listarRequisiciones);
 
 // Obtener requisición por ID
-router.get("/:id", obtenerRequisicion);
+router.get("/api/requisicion/:id", obtenerRequisicion);
 
 // Actualizar requisición por ID
-router.put("/:id", actualizarEstadoRequisicion);
+router.put("/api/requisicion/:id", actualizarEstadoRequisicion);
 
 // Eliminar requisición por ID
-router.delete("/:id", eliminarRequisicion);
+router.delete("/api/requisicion/:id", eliminarRequisicion);
 
 export default router;

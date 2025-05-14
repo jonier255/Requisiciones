@@ -11,21 +11,21 @@ import {
 const router = express.Router();
 
 // Crear producto
-router.post("/", crearProducto);
+router.post("/api/producto", crearProducto);
 
 // Obtener todos los productos
-router.get("/", obtenerProductos);
+router.get("/api/producto", obtenerProductos);
 
 // Obtener producto por ID
-router.get("/:id", obtenerProductoPorId);
+router.get("/api/producto/:id", obtenerProductoPorId);
 
 // Actualizar producto por ID
-router.put("/:id", actualizarProducto);
+router.put("/api/producto/:id", actualizarProducto);
 
 // Eliminar producto por ID
-router.delete("/:id", eliminarProducto);
+router.delete("/api/producto/:id", eliminarProducto);
 
 // Buscar productos por tipo
-router.get("/tipo/:tipo", buscarProductosPorTipo);
+router.get("/api/producto/tipo/:tipo", buscarProductosPorTipo);
 
 export default router;
