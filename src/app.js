@@ -34,18 +34,5 @@ if (fs.existsSync(openApiPath)) {
   App.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 }
 
-// Inicializar expressOasGenerator DESPUÉS de definir rutas
-expressOasGenerator.init(App, {
-  swaggerDocumentOptions: {
-    explorer: true
-  }
-});
-
-// Documentación Swagger (esto será reemplazado por expressOasGenerator)
-const openApiPath = path.join(__dirname, '../openapi.json');
-if (fs.existsSync(openApiPath)) {
-  const swaggerDocument = JSON.parse(fs.readFileSync(openApiPath, 'utf-8'));
-  App.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-}
 
 export default App;

@@ -7,7 +7,6 @@ async function main() {
         await connectDB();
         App.listen(PORT, () => {
             console.log(`✅ Servidor escuchando en http://localhost:${PORT}`);
-            console.log(`Documentación API disponible en http://localhost:${PORT}/api-docs`);
         });
     } catch (error) {
         console.error("❌ Error al conectarse a la base de datos", error);

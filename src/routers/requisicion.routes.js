@@ -3,7 +3,7 @@ import {
     crearRequisicion,
     listarRequisiciones,
     obtenerRequisicion,
-    actualizarEstadoRequisicion,
+    actualizarRequisicion,
     eliminarRequisicion
 } from "../controllers/requisiciones.controller.js";
 
@@ -19,7 +19,7 @@ router.get("/api/requisiciones", listarRequisiciones);
 router.get("/api/requisicion/:id", obtenerRequisicion);
 
 // Actualizar requisición por ID
-router.put("/api/requisicion/:id", actualizarEstadoRequisicion);
+router.put("/api/requisicion/:id", actualizarRequisicion);
 
 // Eliminar requisición por ID
 router.delete("/api/requisicion/:id", eliminarRequisicion);
