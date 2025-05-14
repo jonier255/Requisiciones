@@ -9,15 +9,15 @@ import {
 const router = express.Router();
 
 // Crear detalle de requisición
-router.post("/", crearDetalleRequisicion);
+router.post("/api/detallerequisicion", crearDetalleRequisicion);
 
 // Listar detalles de requisición por ID 
-router.get("/detallerequisicion/:requisicion_id", buscarPorRequisicionId);
+router.get("/api/detallerequisicion/:requisicion_id", buscarPorRequisicionId);
 
 // Obtener detalle de requisición por ID
 // router.get("/:id", obtenerDetalleRequisicion);
 
 // Eliminar detalle de requisición por ID
-router.delete("/:id", eliminarDetalleRequisicion);
+router.delete("/api/detallerequisicion/:id", eliminarDetalleRequisicion);
 
 export default router;

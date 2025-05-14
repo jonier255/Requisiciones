@@ -1,4 +1,6 @@
 import DetalleRequisicion from "../models/DetalleRequisicion.js";
+import Requisicion from "../models/Requisicion.js";
+import Producto from "../models/Producto.js";
 
 
 //crear detalle
@@ -60,7 +62,11 @@ export const eliminarDetalle = async (id) => {
 export const buscarPorRequisicionId = async (requisicion_id) => {
     try {
         return await DetalleRequisicion.findAll({
-            where: { requisicion_id }
+            where: { requisicion_id },
+            include: [
+                { model: Requisicion },
+                { model: Producto }
+            ]
         });
     } catch (error) {
         throw new Error("Error al buscar detalles por requisición ID: " + error.message);
@@ -73,6 +79,6 @@ export default {
     obtenerDetallePorId,
     actualizarDetalle,
     eliminarDetalle,
-    buscarPorRequisicionId, 
-    
+    buscarPorRequisicionId,
+
 };

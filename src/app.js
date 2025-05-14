@@ -1,30 +1,38 @@
 import express from 'express';
 import morgan from 'morgan';
-import path from 'path';
-import fs from 'fs';
-import swaggerUi from 'swagger-ui-express';
-import { fileURLToPath } from 'url';
 import expressOasGenerator from 'express-oas-generator';
+import fs from 'fs';
+import path from 'path';
+import {dirname} from 'path';
+import { fileURLToPath } from 'url';
 import productoRoutes from "./routers/producto.routes.js";
-import alertasRoutes from "./routers/alertas.routes.js";
-import requisicionRoutes from "./routers/requisicion.routes.js";
-import detalleRequisicionRoutes from "./routers/detallerequisicion.routes.js";
+import alertasRoutes from "./routers/alertas.routes.js"
+import requisicionRoutes from "./routers/requisicion.routes.js"
+import detalleRequisicionRoutes from "./routers/detallerequisicion.routes.js"
 
-// Simulación de __dirname para ESModules
+// configuracion de la documentacion para la api
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const __dirname = dirname(__filename);
 
 const App = express();
 
+expressOasGenerator.init(App, {});
+
+
 // Middlewares
 App.use(morgan('dev'));
-App.use(express.json());
+App.use(express.json()); 
+App.use(productoRoutes);
+App.use(alertasRoutes); 
+App.use(requisicionRoutes);
+App.use(detalleRequisicionRoutes);
 
-// Rutas
-App.use("/producto", productoRoutes);
-App.use("/alertas", alertasRoutes);
-App.use("/requisicion", requisicionRoutes);
-App.use("/detallerequisicion", detalleRequisicionRoutes);
+// Documentación Swagger
+const openApiPath = path.join(__dirname, '../openapi.json');
+if (fs.existsSync(openApiPath)) {
+  const swaggerDocument = JSON.parse(fs.readFileSync(openApiPath, 'utf-8'));
+  App.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
 
 // Inicializar expressOasGenerator DESPUÉS de definir rutas
 expressOasGenerator.init(App, {
