@@ -34,9 +34,9 @@ export const obtenerRequisicion = async (req, res) => {
 };
 
 // Actualizar estado de requisición
-export const actualizarEstadoRequisicion = async (req, res) => {
+export const actualizarRequisicion = async (req, res) => {
     try {
-        const requisicionActualizada = await RequisicionService.actualizarEstadoRequisicion(req.params.id, req.body.estado);
+        const requisicionActualizada = await RequisicionService.actualizarRequisicion(req.params.id, req.body.estado);
         res.status(200).json(requisicionActualizada);
     } catch (error) {
         console.error('Error al actualizar el estado de la requisición:', error.message);
