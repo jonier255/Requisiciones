@@ -1,4 +1,5 @@
 import express from "express";
+import authMiddleware from '../middleware/auth.middleware.js';
 import {
     crearDetalleRequisicion,
     buscarPorRequisicionId,
@@ -9,7 +10,7 @@ import {
 const router = express.Router();
 
 // Crear detalle de requisición
-router.post("/api/detallerequisicion", crearDetalleRequisicion);
+router.post("/api/detallerequisicion", authMiddleware, crearDetalleRequisicion);
 
 // Listar detalles de requisición por ID 
 router.get("/api/detallerequisicion/:requisicion_id", buscarPorRequisicionId);
@@ -18,6 +19,6 @@ router.get("/api/detallerequisicion/:requisicion_id", buscarPorRequisicionId);
 // router.get("/:id", obtenerDetalleRequisicion);
 
 // Eliminar detalle de requisición por ID
-router.delete("/api/detallerequisicion/:id", eliminarDetalleRequisicion);
+router.delete("/api/detallerequisicion/:id", authMiddleware, eliminarDetalleRequisicion);
 
 export default router;
