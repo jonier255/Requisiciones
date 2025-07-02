@@ -7,11 +7,12 @@ import {
     eliminarProducto,
     buscarProductosPorTipo
 } from "../controllers/productos.controller.js";
+import authMiddleware from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
 // Crear producto
-router.post("/api/producto", crearProducto);
+router.post("/api/producto", authMiddleware, crearProducto);
 
 // Obtener todos los productos
 router.get("/api/producto", obtenerProductos);
@@ -20,12 +21,12 @@ router.get("/api/producto", obtenerProductos);
 router.get("/api/producto/:id", obtenerProductoPorId);
 
 // Actualizar producto por ID
-router.put("/api/producto/:id", actualizarProducto);
+router.put("/api/producto/:id", authMiddleware, actualizarProducto);
 
 // Eliminar producto por ID
-router.delete("/api/producto/:id", eliminarProducto);
+router.delete("/api/producto/:id", authMiddleware, eliminarProducto);
 
 // Buscar productos por tipo
-router.get("/api/producto/tipo/:tipo", buscarProductosPorTipo);
+router.get("/api/producto/tipo/:tipo", authMiddleware, buscarProductosPorTipo);
 
 export default router;

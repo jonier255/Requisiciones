@@ -1,4 +1,5 @@
 import express from "express";
+import authMiddleware from '../middleware/auth.middleware.js';
 import {
     listarAlertas,
     obtenerAlerta,
@@ -11,7 +12,7 @@ import {
 const router = express.Router();
 
 // Crear una nueva alerta
-router.post("/api/alertas", crearAlerta);
+router.post("/api/alertas", authMiddleware, crearAlerta);
 
 
 // Listar todas las alertas
@@ -22,7 +23,7 @@ router.get("/api/alerta/:id", obtenerAlerta);
 
 
 // Actualizar una alerta por ID
-router.put("/api/alerta/:id", actualizarAlerta);
+router.put("/api/alerta/:id", authMiddleware, actualizarAlerta);
 
 // Eliminar una alerta por ID
 router.delete("/api/alerta/:id", eliminarAlerta);

@@ -9,6 +9,8 @@ import productoRoutes from "./routers/producto.routes.js";
 import alertasRoutes from "./routers/alertas.routes.js"
 import requisicionRoutes from "./routers/requisicion.routes.js"
 import detalleRequisicionRoutes from "./routers/detallerequisicion.routes.js"
+import authRoutes from './routers/auth.routes.js'
+
 
 // configuracion de la documentacion para la api
 const __filename = fileURLToPath(import.meta.url);
@@ -26,6 +28,8 @@ App.use(productoRoutes);
 App.use(alertasRoutes); 
 App.use(requisicionRoutes);
 App.use(detalleRequisicionRoutes);
+App.use('/api/auth', authRoutes);
+
 
 // Documentación Swagger
 const openApiPath = path.join(__dirname, '../openapi.json');
