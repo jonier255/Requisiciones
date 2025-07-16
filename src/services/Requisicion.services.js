@@ -1,6 +1,8 @@
 import Requisicion from "../models/Requisicion.js";
 import { sendRequisition } from '../services/dispatchApiLaboratorio.js';
 import { sendRequisitionProveedor } from "../services/dispatchApiProveedores.js";
+import { sendLogin } from "../services/dispatchApiAuth.js";
+import { token } from "morgan";
 
 
 //crear
@@ -14,7 +16,8 @@ export const crearRequisicion = async (data) => {
     }
 
     if (requisicion.destino === 'PROVEEDORES') {
-      dispatchResponse = await sendRequisitionProveedor(requisicion);
+      let token = await sendLogin();
+      dispatchResponse = await sendRequisitionProveedor(requisicion, token);
     }
 
     return {
