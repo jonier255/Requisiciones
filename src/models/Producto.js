@@ -18,7 +18,13 @@ export const Producto =  sequelize.define("Producto",{
     cantidad: {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    codigoSerie: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true
     }
+
     }, {
     tableName: "producto",
     timestamps: false 

@@ -29,6 +29,19 @@ export const obtenerProductoPorId = async (id) => {
         throw new Error("Error al buscar el producto por ID: " + error.message);
     }
 };
+
+//obtener por codigo
+export const obtenerProductoPorCodigo = async (codigoSerie) => {
+    try {
+        const producto = await Producto.findOne({ where: { codigoSerie } });
+        if (!producto) {
+            throw new Error("Producto no encontrado");
+        }
+        return producto;
+    } catch (error) {
+        throw new Error("Error al buscar el producto por código: " + error.message);
+    }
+};
 //actualizar
 export const actualizarProducto = async (id, newData) => {
     try {

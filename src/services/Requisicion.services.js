@@ -1,14 +1,32 @@
 import Requisicion from "../models/Requisicion.js";
+import { sendRequisition } from '../services/dispatchApiLaboratorio.js';
+import { sendRequisitionProveedor } from "../services/dispatchApiProveedores.js";
+import { sendLogin } from "../services/dispatchApiAuth.js";
+import { token } from "morgan";
 
 
 //crear
 export const crearRequisicion = async (data) => {
-    try {
-        const requisicion = await Requisicion.create(data);
-        return requisicion;
-    } catch (error) {
-        throw new Error("Error al crear la requisición: " + error.message);
+  try {
+    const requisicion = await Requisicion.create(data);
+    let dispatchResponse = null;
+
+    if (requisicion.destino === 'LABORATORIO') {
+      dispatchResponse = await sendRequisition(requisicion);
     }
+
+    if (requisicion.destino === 'PROVEEDORES') {
+      let token = await sendLogin();
+      dispatchResponse = await sendRequisitionProveedor(requisicion, token);
+    }
+
+    return {
+      requisicion,
+      dispatchResponse
+    };
+  } catch (error) {
+    throw new Error("Error al crear la requisición: " + error.message);
+  }
 };
 //obtener
 export const obtenerRequisiciones = async () => {

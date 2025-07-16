@@ -1,5 +1,6 @@
 import { DataTypes } from "sequelize";
 import { sequelize as sequelize } from "../database/conexion.js";
+import Producto from "./Producto.js";
 
 
 const Requisicion = sequelize.define("Requisicion", {
@@ -25,12 +26,26 @@ const Requisicion = sequelize.define("Requisicion", {
         allowNull: true
     },
     destino:{
-        type: DataTypes.TEXT,
+        type: DataTypes.ENUM('LABORATORIO', 'PROVEEDORES'),
         allowNull: true
-    }
-    }, { 
-        tableName: "requisicion",
-        timestamps: false
+    },
+    Producto_codigoSerie: {
+        type: DataTypes.STRING,
+        allowNull: true,
+        references: {
+            model: 'producto',
+            key: 'codigoSerie'
+        }
+    },
+    urgencia: {
+        type: DataTypes.ENUM('ALTA', 'MEDIA', 'BAJA'),
+        allowNull: true
+}},
+{ 
+    tableName: "requisicion",
+    timestamps: false
 });
 
 export default Requisicion;
+Producto.belongsTo(Requisicion, { foreignKey: 'RequisicionId' });
+Requisicion.hasMany(Producto, { foreignKey: 'RequisicionId' });
