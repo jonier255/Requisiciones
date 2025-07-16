@@ -9,7 +9,7 @@ async function main() {
         await connectDB();
 
         //sincroniza los modelos con la base de datos
-        await sequelize.sync({ alter: true });
+        await sequelize.sync({ force: false });
         console.log('📦 Modelos sincronizados con la base de datos');
 
         App.listen(PORT, () => {

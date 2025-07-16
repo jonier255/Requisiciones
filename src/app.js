@@ -8,7 +8,6 @@ import { fileURLToPath } from 'url';
 import productoRoutes from "./routers/producto.routes.js";
 import alertasRoutes from "./routers/alertas.routes.js"
 import requisicionRoutes from "./routers/requisicion.routes.js"
-import detalleRequisicionRoutes from "./routers/detallerequisicion.routes.js"
 import authRoutes from './routers/auth.routes.js'
 
 
@@ -27,7 +26,6 @@ App.use(express.json());
 App.use(productoRoutes);
 App.use(alertasRoutes); 
 App.use(requisicionRoutes);
-App.use(detalleRequisicionRoutes);
 App.use('/api/auth', authRoutes);
 
 
